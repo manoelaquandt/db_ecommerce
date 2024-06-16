@@ -1,9 +1,9 @@
 # db_ecommerce
 Refinando um Projeto Conceitual de Banco de Dados – E-COMMERCE
 
-Aluna: Manoela Quandt
-Digital Innovation One
-Instrutora:Juliana Mascarenhas 
+Aluna: Manoela Quandt<br>
+Digital Innovation One<br>
+Instrutora:Juliana Mascarenhas <br>
 
 Objetivo:
 
