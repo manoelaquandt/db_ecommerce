@@ -1,0 +1,112 @@
+Produto {
+	idProduto integer pk increments unique
+	Categoria varchar(45)
+	Descrição varchar(45)
+	Valor varchar(45)
+}
+
+Cliente {
+	idCliente integer pk increments unique
+	Nome varchar(45)
+	Idenficação varchar(45)
+	Endereço varchar(45)
+	Cliente_idPagamento integer > Pagamento.idPagamento
+}
+
+Estoque {
+	idEstoque integer pk increments unique
+	Local varchar(45)
+}
+
+Fornecedor {
+	idFornecedor integer pk increments unique
+	Razão_Social varchar(45)
+	CNPJ varchar(45)
+}
+
+Pedido {
+	idPedido integer pk increments unique
+	Status_do_pedido varchar(45)
+	Descrição varchar(45)
+	Pedido_idPagamento integer >* Pagamento.idPagamento
+	Frete float(45)
+	idcodigoderastreamento integer > Formas_de_envio.Codigo_de_rastreamento
+}
+
+Disponibilizando {
+	Fornecedor_idFornecedor integer pk increments unique *> Fornecedor.idFornecedor
+	Produto_idProduto integer *> Produto.idProduto
+}
+
+Produto_estoque {
+	Produto_idProduto integer pk increments unique *> Produto.idProduto
+	Estoque_idEstoque integer *> Estoque.idEstoque
+	Quantidade integer
+}
+
+Relação_de_produto/pedido {
+	Produto_idProduto integer pk increments unique *>* Produto.idProduto
+	Pedido_idProduto integer *> Pedido.idPedido
+}
+
+Terceiro-vendedor {
+	idVendedor integer pk increments unique
+	Razão_social varchar(45)
+	Local varchar(45)
+}
+
+Produtos_por_vendedor {
+	Produto_dProdutos integer pk increments unique *>* Produto.idProduto
+	Vendedor_idVendedor integer *>* Terceiro-vendedor.idVendedor
+	Quantidade integer
+}
+
+Pagamento {
+	idPagamento integer pk increments unique
+	Pagamento_idCartãodebito integer > Cartão_de_debito.idCartãodedebito
+	Pagamento_idCartãocredito integer > Cartão_de_credito.idCartãocredito
+	Pagamento_idBoleto integer > Boleto.idBoleto
+}
+
+Conta_do_cliente {
+	idConta_do_cliente integer pk increments unique
+	Cliente_idPJ integer > PJ.idPJ
+	Cliente_idCPF integer > PF.idPF
+}
+
+PJ {
+	idPJ integer pk increments unique > Cliente.idCliente
+	Razão_social varchar(45)
+	CNPJ varchar(45)
+}
+
+PF {
+	idPF integer pk increments unique > Cliente.idCliente
+	Nome varchar(45)
+	CPF varchar(45)
+}
+
+Cartão_de_credito {
+	idCartãocredito integer pk increments unique
+	Operadora varchar(45)
+	Nome varchar(45)
+	Numero_do_cartão varchar(45)
+	Parcelas varchar(2)
+}
+
+Cartão_de_debito {
+	idCartãodedebito integer pk increments unique
+	Operadora varchar(45)
+	Nome varchar(45)
+}
+
+Boleto {
+	idBoleto integer pk increments unique
+}
+
+Formas_de_envio {
+	idEnvio integer pk increments unique
+	Formas_envio varchar(45)
+	EndereÇo varchar(45)
+	Codigo_de_rastreamento integer
+}
